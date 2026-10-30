@@ -33,7 +33,7 @@ export function updatedPersona(base,state,changes){
 }
 export function ownerSettingsView(base,state){
   const p=state.resources?.persona;
-  return {pluginVersion:'0.8.0-dev.18',persona:personaStatus(state),limits:p?inheritedLimits(base,p):null,
+  return {pluginVersion:'0.8.0-dev.19',persona:personaStatus(state),limits:p?inheritedLimits(base,p):null,
     interactionLimits:interactionLimits(p?.interactionLimits),interactionAdapterConnected:true,
     settings:p?{...p.schedule,scheduleEnabled:p.schedule.enabled??true,readIntervalMinutes:p.schedule.intervalMinutes,likedTags:p.likedTags,blockedTags:p.blockedTags,ownerId:p.ownerId,ownerAddress:p.ownerAddress??base.ownerAddress??'主人',dmContacts:p.dmContacts,watch:watchPolicy(p),...inheritedLimits(base,p)}:null,
     sendingSupported:true,sendingScope:'explicit_exact_public_actions_and_verified_owner_dm',ownerDmReadSupported:true,automaticSendingEnabled:false,ownerAutomaticReplyConfigured:state.resources?.ownerReplies?.enabled===true,inboxConnected:false,

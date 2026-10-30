@@ -43,7 +43,7 @@ const serviceIdentity=service=>service?.[Symbol.for('cordis.original')]??service
 const usageLink=value=>{try{const url=new URL(value);return url.origin==='https://platform.deepseek.com'&&url.pathname==='/usage'&&!url.search&&!url.hash&&!url.username&&!url.password?url.href:null;}catch{return null;}};
 
 export class FishBilling{
- constructor({account,selection,now=Date.now,version='0.8.0-dev.18',timeoutMs=35000,ttlMs=60000,retryMs=30000,minRefreshMs=10000}){
+ constructor({account,selection,now=Date.now,version='0.8.0-dev.19',timeoutMs=35000,ttlMs=60000,retryMs=30000,minRefreshMs=10000}){
   Object.assign(this,{account,selection,now,version,timeoutMs,ttlMs,retryMs,minRefreshMs});
   this.value=copy(fallback);this.generation=0;this.service=null;this.pending=null;this.nextCheck=0;this.lastStarted=null;this.closed=false;
  }

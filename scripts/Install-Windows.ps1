@@ -4,7 +4,7 @@ param([string]$DshPath, [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$Profile = 
 $installation = Find-DshInstallation -DshPath $DshPath
 $repo = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $manifest = Get-Content -LiteralPath (Join-Path $repo 'package.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-if ($manifest.name -ne '@local/dsh-douyin-fish' -or $manifest.version -ne '0.8.0-dev.18') { throw 'Unexpected plugin package.' }
+if ($manifest.name -ne '@local/dsh-douyin-fish' -or $manifest.version -ne '0.8.0-dev.19') { throw 'Unexpected plugin package.' }
 $dataHome = Get-FishHome -DshHome $DshHome
 $profileDir = Join-Path (Join-Path $dataHome 'profiles') $Profile
 Write-Host "Plugin: $($manifest.name) $($manifest.version)"

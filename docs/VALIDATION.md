@@ -1,9 +1,10 @@
-# dev.18 Windows 发布验收
+# dev.19 Windows 发布验收
 
 2026-10-30，基于 DeepSeek Harness 0.2.1-rc.2 Windows x64 / Node.js 24.21.0。
 
 | 检查 | 结果 |
 | --- | --- |
+| dev.19 控制台启动兼容 | Windows 优先直接启动已安装 Edge；无 Edge 时检查系统打开命令退出结果；设置页始终提供可选中地址和复制按钮。419项测试通过，覆盖启动失败与剪贴板拒绝回退。尚未在报错的另一台设备现场确认 |
 | 免 Git 地址安装 | 隔离进程 PATH 仅含 Windows 系统目录与 Node，确认找不到 git；官方 CLI 使用仓库 main.tar.gz 地址下载安装 dev.18 并合成 bundle 配置成功 |
 | GitHub 地址安装 | 官方 DSH CLI 使用 https://github.com/MATH-1-ZERO/dsh-douyin-fish，在隔离 DSH_HOME / github-check profile 下载并安装 dev.18，登记 bundle 并合成配置成功 |
 | 安装产物 | 实际下载包的 src/index.js 可导入、client 导出正确，配置、人设、控制台资源和工具说明均存在，tests 不进入安装包 |

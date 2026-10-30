@@ -343,7 +343,7 @@ test('disabled live tool and configuration status never initialize real user sta
   apply({tools:{register(t){tools.push(t);}}});
   const status=await tools.find(t=>t.name==='fish_browser_status').execute({},{});
   assert.equal(status.enabled,false);assert.equal(status.liveConnectionChecked,false);
-  assert.equal(status.pluginVersion,'0.8.0-dev.18');assert.equal(status.manualReadEnabled,true);assert.equal(status.launchSupported,true);
+  assert.equal(status.pluginVersion,'0.8.0-dev.19');assert.equal(status.manualReadEnabled,true);assert.equal(status.launchSupported,true);
   const page=await tools.find(t=>t.name==='fish_read_page').execute({},{});
   assert.equal(page.reason,'browser_disabled');
 });

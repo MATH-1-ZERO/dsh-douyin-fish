@@ -101,7 +101,7 @@ export function transition(settings, previous, command, input = {}, time = Date.
   // 7-day duplicate window; histories are shared across sessions and restarts.
   s.history = s.history.filter(h => time - h.time < 7 * day);
   if (command === 'status') return result({ mode: c.browser?.enabled ? 'read_only_test_page' : c.manualDrafts?.enabled ? 'manual_drafts' : 'local_rehearsal_only', paused: s.paused,
-    pluginVersion:'0.8.0-dev.18',enabled: c.enabled, browserConnected: false, sendingSupported: true,
+    pluginVersion:'0.8.0-dev.19',enabled: c.enabled, browserConnected: false, sendingSupported: true,
     sendingScope:'explicit_exact_public_actions_and_verified_owner_dm',automaticSendingEnabled:false,ownerAutomaticReplyConfigured:s.resources.ownerReplies?.enabled===true,ownerDmReadSupported:true,
     ownerAutomaticReplyImplemented:true,ownerAutomaticReplyLiveVerified:liveVerificationView(s).ownerReplyLiveVerified,ownerAutomaticReplyEnabled:s.resources.ownerReplies?.enabled===true,
     developmentMode:s.resources.development?.enabled===true,developmentReads:s.resources.development?.readsTotal??0,

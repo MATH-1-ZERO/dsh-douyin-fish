@@ -272,5 +272,5 @@ export class FishAutonomy{
     if(this.active)await this.active;
     return {paused:true,autonomyEnabled:false,sendingSupported:false,cancelledActiveCycle:cycleActive};
   }
-  async status(){const s=await this.store.snapshot(),deliveryMode=s.resources?.autonomy?.deliveryMode??'review';return {pluginVersion:'0.8.0-dev.18',runtimeActive:this.live,agentRuntimeAvailable:typeof this.generate==='function',resumeRequired:s.resources?.autonomy?.enabled===true&&!this.live,policy:s.resources?.autonomy??freshAutonomy(),nextCheck:admission(await this.loadBase(),structuredClone(s),this.now()),paused:s.paused,sendingSupported:sendsInMode(deliveryMode),inboxConnected:false,mode:modeLabel(deliveryMode),draftQueueTool:'fish_manual_queue',publicVisibilityVerified:false};}
+  async status(){const s=await this.store.snapshot(),deliveryMode=s.resources?.autonomy?.deliveryMode??'review';return {pluginVersion:'0.8.0-dev.19',runtimeActive:this.live,agentRuntimeAvailable:typeof this.generate==='function',resumeRequired:s.resources?.autonomy?.enabled===true&&!this.live,policy:s.resources?.autonomy??freshAutonomy(),nextCheck:admission(await this.loadBase(),structuredClone(s),this.now()),paused:s.paused,sendingSupported:sendsInMode(deliveryMode),inboxConnected:false,mode:modeLabel(deliveryMode),draftQueueTool:'fish_manual_queue',publicVisibilityVerified:false};}
 }

@@ -1,5 +1,6 @@
 import {spawn} from 'node:child_process';
-import {join} from 'node:path';
+import {access} from 'node:fs/promises';
+import {windowsPaths} from './windows-paths.js';
 
 export const CONSOLE_LAUNCH_PATH='/api/douyin-fish/console-open';
 export function validatedConsoleUrl(value){
@@ -7,13 +8,24 @@ export function validatedConsoleUrl(value){
  if(url.protocol!=='http:'||url.hostname!=='127.0.0.1'||!url.port||url.username||url.password||url.pathname!=='/'||url.search||!/^#access=[a-f0-9]{64}$/.test(url.hash))throw Error('Invalid local console URL');
  return url.href;
 }
-export async function openConsoleBrowser(value){
+export async function openConsoleBrowser(value,{platform=process.platform,env=process.env,canAccess=access,spawnProcess=spawn}={}){
  const url=validatedConsoleUrl(value);
- const command=process.platform==='win32'?join(process.env.SystemRoot||'C:\\Windows','System32','rundll32.exe'):process.platform==='darwin'?'/usr/bin/open':'xdg-open';
- const args=process.platform==='win32'?['url.dll,FileProtocolHandler',url]:[url];
+ let command=platform==='darwin'?'/usr/bin/open':'xdg-open',args=[url],waitForExit=false;
+ if(platform==='win32'){
+  const paths=windowsPaths(env);let edge;
+  for(const candidate of paths.edgeCandidates){try{await canAccess(candidate);edge=candidate;break;}catch{}}
+  if(edge){command=edge;args=['--new-window',url];}
+  else{
+   command=paths.powershell;waitForExit=true;
+   const script="$ErrorActionPreference='Stop'; Start-Process -FilePath $env:DSH_FISH_CONSOLE_URL";
+   args=['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(script,'utf16le').toString('base64')];
+  }
+ }
  await new Promise((resolve,reject)=>{
-  const child=spawn(command,args,{detached:true,windowsHide:false,stdio:'ignore'});
-  child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});
+  const child=spawnProcess(command,args,{detached:!waitForExit,windowsHide:waitForExit,stdio:'ignore',env:{...env,DSH_FISH_CONSOLE_URL:url}});
+  child.once('error',reject);
+  if(waitForExit){const timer=setTimeout(()=>{child.kill();reject(Error('Browser launch timed out'));},15000);child.once('error',()=>clearTimeout(timer));child.once('exit',code=>{clearTimeout(timer);code===0?resolve():reject(Error('Browser association failed'));});}
+  else child.once('spawn',()=>{child.unref();resolve();});
  });
 }
 const json=(status,value)=>new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});

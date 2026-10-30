@@ -147,7 +147,7 @@ export function apply(ctx) {
   const stopAll=async()=>{await conversations.stop();await replies.stop();return worker.stop();};
   const controls=new ConsoleOperations({store,loadBase,replies:conversations,worker,stopAll});
   const billing=createBillingReader(ctx);
-  const dashboard=new FishConsole({snapshot:async role=>consoleView(await store.snapshot(),{version:'0.8.0-dev.18',role,billing:await billing.read({role,wait:false}),runtime:{hostConnected:typeof ctx.effect==='function',canControl:typeof generate==='function',conversationRepliesActive:conversations.live,consoleOperationActive:controls.busy,browser:controls.browser,ownerRepliesActive:replies.live,autonomyActive:worker.live,testRunning:replies.testRunning,testReplyCount:replies.testReplies?.length??0,testMaxReplies:replies.testMaxReplies}}),commands:{
+  const dashboard=new FishConsole({snapshot:async role=>consoleView(await store.snapshot(),{version:'0.8.0-dev.19',role,billing:await billing.read({role,wait:false}),runtime:{hostConnected:typeof ctx.effect==='function',canControl:typeof generate==='function',conversationRepliesActive:conversations.live,consoleOperationActive:controls.busy,browser:controls.browser,ownerRepliesActive:replies.live,autonomyActive:worker.live,testRunning:replies.testRunning,testReplyCount:replies.testReplies?.length??0,testMaxReplies:replies.testMaxReplies}}),commands:{
     ...controls.commands(),
     refresh_billing:async()=>({allowed:true,billing:await billing.read({force:true})}),
     start_replies:()=>controls.commands().start_plugin({mode:'replies'}),
@@ -184,13 +184,13 @@ export function apply(ctx) {
         if(['owner_replies_start','owner_replies_recover','owner_replies_test_once','owner_replies_test_run','autonomy_start','autonomy_recover','autonomy_test_once','owner_settings_update','persona_import','browser_session_adopt','development_mode'].includes(command)){if(controls.busy)return {allowed:false,reason:'console_operation_in_progress'};if(conversations.live)await conversations.stop();}
         if(command==='owner_receipt_confirm')return store.transact(state=>confirmOwnerReceipt(state,args));
         if(command==='attempts_archive')return store.transact(state=>archiveUncertain(state,args));
-        if(command==='browser_session_status')return {pluginVersion:'0.8.0-dev.18',...await retainedBrowserStatus()};
+        if(command==='browser_session_status')return {pluginVersion:'0.8.0-dev.19',...await retainedBrowserStatus()};
         if(command==='browser_session_adopt'){const s=await store.snapshot();if(!s.paused||s.resources.autonomy?.enabled||s.resources.ownerReplies?.enabled)return {allowed:false,reason:'pause_before_browser_adoption'};return adoptRetainedBrowser(args.confirm);}
         if(command==='browser_session_release'){if(args.confirm!=='release_retained_browser_without_closing')return {allowed:false,reason:'explicit_release_required'};await stopAll();return releaseRetainedBrowser(args.confirm);}
         if(command==='model_probe'){
           if(args.confirm!=='probe_agent_session_without_model')return {allowed:false,reason:'explicit_model_probe_required'};
           if(typeof generate?.probe!=='function')return {allowed:false,reason:'DSH_agent_runtime_unavailable'};
-          return {pluginVersion:'0.8.0-dev.18',...await generate.probe({signal:exec?.signal})};
+          return {pluginVersion:'0.8.0-dev.19',...await generate.probe({signal:exec?.signal})};
         }
         if(command==='development_mode'){
           if(args.confirm!=='set_development_mode'||typeof args.enabled!=='boolean')throw Error('Explicit owner development mode required');
@@ -202,7 +202,7 @@ export function apply(ctx) {
         }
         if(command==='interaction_status'){
           const s=await store.snapshot();
-          return {pluginVersion:'0.8.0-dev.18',sendingSupported:true,sendingScope:'explicit_exact_public_actions_and_verified_owner_dm',adapterConnected:true,inboxConnected:false,verification:liveVerificationView(s),browserSessionTool:'fish_browser_session_status',
+          return {pluginVersion:'0.8.0-dev.19',sendingSupported:true,sendingScope:'explicit_exact_public_actions_and_verified_owner_dm',adapterConnected:true,inboxConnected:false,verification:liveVerificationView(s),browserSessionTool:'fish_browser_session_status',
             ownerDmReadSupported:true,ownerDmSendSupported:true,autonomousSendingSupported:true,autonomousSendingLiveVerified:false,
             videoLinkSharingImplemented:true,videoLinkSharingLiveVerified:false,nativeShareCardImplemented:true,nativeShareCardSupported:true,nativeShareCardLiveVerified:liveVerificationView(s).nativeCardLiveVerified,nativeShareCardAutomaticSupported:liveVerificationView(s).nativeCardLiveVerified,
             publicCommentSendingSupported:true,likeSendingSupported:true,publicCommentSendingLiveVerified:false,likeSendingLiveVerified:false,replySendingImplemented:true,replySendingLiveVerified:false,mentionSendingImplemented:true,mentionSendingSupported:true,mentionSendingLiveVerified:liveVerificationView(s).nativeMentionLiveVerified,mentionAutomaticSendingSupported:liveVerificationView(s).nativeMentionLiveVerified,otherContactDmSupported:true,otherContactDmLiveVerified:false,contactSelectionEntry:'console',
@@ -289,7 +289,7 @@ export function apply(ctx) {
           loadSettings});
         if(command==='browser_status') {
           const c=browserSettings(settings);
-          return {pluginVersion:'0.8.0-dev.18',enabled:c.enabled,endpoint:c.endpoint,allowedPages:c.allowedPages,
+          return {pluginVersion:'0.8.0-dev.19',enabled:c.enabled,endpoint:c.endpoint,allowedPages:c.allowedPages,
             sendingSupported:true,sendingScope:'explicit_exact_public_actions_and_verified_owner_dm',launchSupported:settings.manualBrowser?.enabled===true,liveConnectionChecked:false,
             manualReadSupported:true,manualReadEnabled:settings.manualBrowser?.enabled===true,
             combinedDraftPreparationSupported:true,

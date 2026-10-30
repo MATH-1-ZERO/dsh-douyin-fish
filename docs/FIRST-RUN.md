@@ -3,7 +3,7 @@
 把下面这段发给 DeepSeek Harness；先完成普通聊天，确认当前模型能正常回答。
 
 ```text
-我安装了大肥鱼插件。请先调用 fish_status 核对版本 0.8.0-dev.18。
+我安装了大肥鱼插件。请先调用 fish_status 核对版本 0.8.0-dev.19。
 这是首次配置：调用 fish_persona_import，confirm="import_persona"、useBuiltin=true。
 我希望在开发阶段连续读取：调用 fish_development_mode，confirm="set_development_mode"、enabled=true。
 作息保持关闭，模型和发送预算保留。

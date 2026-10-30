@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-douyin-fish",
-  "version": "0.8.0-dev.18",
+  "version": "0.8.0-dev.19",
   "private": true,
   "type": "module",
   "description": "大肥鱼控制台：主人与指定单聊自动回复、兴趣筛选原生卡片分享和评论、可编辑人设、真实账单与专用Edge运行控制。",

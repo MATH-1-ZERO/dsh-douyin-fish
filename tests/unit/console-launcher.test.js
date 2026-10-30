@@ -2,8 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {runInNewContext} from 'node:vm';
-import {consoleLaunchRoute,validatedConsoleUrl,installConsoleLauncher} from '../../src/console-launcher.js';
+import {consoleLaunchRoute,validatedConsoleUrl,installConsoleLauncher,openConsoleBrowser} from '../../src/console-launcher.js';
+import {EventEmitter} from 'node:events';
 const url='http://127.0.0.1:12345/#access='+'a'.repeat(64);
+test('Windows opens installed Edge directly without relying on URL associations',async()=>{
+ let invocation;
+ await openConsoleBrowser(url,{platform:'win32',env:{LOCALAPPDATA:'D:\\User Space'},canAccess:async path=>{if(!path.startsWith('D:'))throw Error('missing');},spawnProcess(command,args,options){invocation={command,args,options};const child=new EventEmitter();child.unref=()=>{};queueMicrotask(()=>child.emit('spawn'));return child;}});
+ assert.match(invocation.command,/msedge.exe$/);assert.deepEqual(invocation.args,['--new-window',url]);assert.equal(invocation.options.detached,true);
+});
+test('missing Edge uses checked system association and reports process failure',async()=>{
+ let invocation;
+ await assert.rejects(openConsoleBrowser(url,{platform:'win32',env:{SystemRoot:'D:\\Windows'},canAccess:async()=>{throw Error('missing');},spawnProcess(command,args,options){invocation={command,args,options};const child=new EventEmitter();child.kill=()=>{};queueMicrotask(()=>child.emit('exit',1));return child;}}),/association failed/);
+ assert.match(invocation.command,/powershell.exe$/);assert.equal(invocation.options.env.DSH_FISH_CONSOLE_URL,url);assert.equal(invocation.options.windowsHide,true);assert.equal(invocation.options.detached,false);
+ assert.ok(!invocation.args.join(' ').includes(url));
+});
 const request=(body={intent:'open_console'},init={})=>new Request('http://localhost/api/douyin-fish/console-open',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),...init});
 test('launcher accepts only generated local console URLs',()=>{
  assert.equal(validatedConsoleUrl(url),url);
@@ -35,4 +47,15 @@ test('client bundle registers the settings entry without launching on plugin act
  assert.equal(loaded.id,'@local/dsh-douyin-fish');const client=loaded.factory(name=>{assert.equal(name,'react');return {createElement(){}};});
  client.apply({slots:{inject(name,setup){assert.equal(name,'settings.section');return setup();},register(options,component){registered={options,component};}}});
  assert.equal(registered.options.id,'douyin-fish-console');assert.equal(registered.options.label,'大肥鱼控制台');assert.equal(typeof registered.component,'function');assert.equal(requests,0);
+});
+test('ready launcher always offers a selectable local URL and clipboard failure guidance',async()=>{
+ let loaded,component,status;
+ runInNewContext(await readFile(new URL('../../src/client.js',import.meta.url),'utf8'),{window:{__ModuleLoader__:{load(value){loaded=value;}}},URL,navigator:{clipboard:{async writeText(){throw Error('clipboard denied');}}}});
+ let hook=0;const React={createElement:(tag,props,...children)=>({tag,props,children}),useState(){return hook++===0?[{phase:'opened',url},()=>{}]:['',value=>{status=value;}];},useRef:()=>({current:null}),useEffect(){}};
+ loaded.factory(()=>React).apply({slots:{inject(name,setup){setup();},register(options,value){component=value;}}});
+ const flatten=node=>node&&typeof node==='object'?[node,...node.children.flatMap(flatten)]:[];
+ const nodes=flatten(component()),input=nodes.find(x=>x.tag==='input');assert.equal(input.props.value,url);assert.equal(input.props.readOnly,true);
+ let selected=false;input.props.onClick({target:{select(){selected=true;}}});assert.equal(selected,true);
+ await nodes.find(x=>x.tag==='button'&&x.children.includes('复制控制台地址')).props.onClick();assert.match(status,/Ctrl\+C/);
+ assert.ok(nodes.some(x=>x.children.includes('小鱼的控制台已就绪。')));
 });
