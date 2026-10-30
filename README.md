@@ -1,6 +1,6 @@
 # 大肥鱼 · DeepSeek Harness 抖音插件
 
-Windows 桌面插件，提供暖色本机控制台、主人及指定单聊自动回复、按兴趣筛选视频分享和评论，以及 DSH 账号余额查看。**版本：0.8.0-dev.17，开发预览版。**
+Windows 桌面插件，提供暖色本机控制台、主人及指定单聊自动回复、按兴趣筛选视频分享和评论，以及 DSH 账号余额查看。**版本：0.8.0-dev.18，开发预览版。**
 
 ## 环境
 
@@ -11,7 +11,19 @@ Windows 桌面插件，提供暖色本机控制台、主人及指定单聊自动
 
 这是浏览器界面适配器，**不是抖音官方机器人 API**。抖音页面结构变化会影响功能；登录、平台验证需本人操作。
 
-## Windows 安装
+## 在 DSH 中直接安装（推荐）
+
+打开 DSH 的 **设置 → 插件 → 添加插件**，在输入框粘贴以下完整地址，点击安装：
+
+```text
+https://github.com/MATH-1-ZERO/dsh-douyin-fish
+```
+
+安装完成后，进入 **设置 → 大肥鱼控制台**；若设置页尚未刷新，重启 DSH。随后按下方“首次配置”绑定自己的账号。此方式由 DSH 管理下载与插件目录，无需手动解压、运行安装脚本或保留源码文件夹。插件不需要构建步骤或额外 npm 依赖。
+
+GitHub 下载需要本机网络可达。安装源下拉框的 npm 镜像不会代理 GitHub；遇到连接错误请先检查 GitHub 访问。升级本插件按 DSH 的提示卸载后重新添加，个人运行数据保存在用户目录，不在安装包中。
+
+## 下载源码安装（备用）
 
 1. [下载仓库 ZIP](https://github.com/MATH-1-ZERO/dsh-douyin-fish/archive/refs/heads/main.zip) 并解压，或用 `git clone https://github.com/MATH-1-ZERO/dsh-douyin-fish.git` 克隆到长期保留的位置。路径可以包含中文和空格。
 2. 从系统托盘完全退出 DeepSeek Harness。
@@ -62,6 +74,26 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Install-Windows.ps
 - 浏览器9222端口仅监听本机；控制台是随机本机端口，链接仅当次宿主有效。未知送达停下复核，不自动重发。
 
 ## 开发与发布
+
+目录按用途组织；详见 [源码结构与入口](docs/PROJECT-STRUCTURE.md)。
+
+```text
+dsh-douyin-fish/
+├─ package.json             # DSH 插件元数据、服务端和客户端入口
+├─ cordis.patch.yml         # DSH 插件注册
+├─ src/                     # 插件运行代码
+│  ├─ index.js              # 工具注册与宿主入口
+│  ├─ client.js             # DSH 设置页控制台入口
+│  └─ browser/              # Edge 会话与抖音页面适配
+├─ config/default-settings.json
+├─ console/                 # 控制台页面、样式与交互
+├─ personas/                # 通用初始人设
+├─ locale/                  # 插件本地化
+├─ tests/unit/              # 运行逻辑测试
+├─ tests/browser/           # 页面适配测试
+├─ scripts/                 # Windows 维护和开发检查
+└─ docs/                    # 首次配置、安装和验收说明
+```
 
 双击 `Test-Windows.cmd`，或安装 Node.js 24 后运行：
 

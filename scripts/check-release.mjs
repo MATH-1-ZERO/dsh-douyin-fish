@@ -2,7 +2,7 @@ import {readdir,readFile,access} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {join,relative} from 'node:path';
 import assert from 'node:assert/strict';
-import {validatePersona} from '../persona.js';
+import {validatePersona} from '../src/persona.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const ignored=new Set(['.git','node_modules','work','outputs','coverage','test-results']);
 async function walk(folder){const found=[];for(const e of await readdir(folder,{withFileTypes:true})){if(ignored.has(e.name))continue;const p=join(folder,e.name);if(e.isSymbolicLink())throw Error('Unexpected symlink '+p);if(e.isDirectory())found.push(...await walk(p));else found.push(p);}return found;}
