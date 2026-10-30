@@ -4,6 +4,7 @@
 
 | 检查 | 结果 |
 | --- | --- |
+| 免 Git 地址安装 | 隔离进程 PATH 仅含 Windows 系统目录与 Node，确认找不到 git；官方 CLI 使用仓库 main.tar.gz 地址下载安装 dev.18 并合成 bundle 配置成功 |
 | GitHub 地址安装 | 官方 DSH CLI 使用 https://github.com/MATH-1-ZERO/dsh-douyin-fish，在隔离 DSH_HOME / github-check profile 下载并安装 dev.18，登记 bundle 并合成配置成功 |
 | 安装产物 | 实际下载包的 src/index.js 可导入、client 导出正确，配置、人设、控制台资源和工具说明均存在，tests 不进入安装包 |
 | 目录重构 | src/、src/browser/、tests/unit/、tests/browser/、config/、docs/ 按用途分层，重构后416项测试通过 |

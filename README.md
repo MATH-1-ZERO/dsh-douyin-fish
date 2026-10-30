@@ -23,6 +23,16 @@ https://github.com/MATH-1-ZERO/dsh-douyin-fish
 
 GitHub 下载需要本机网络可达。安装源下拉框的 npm 镜像不会代理 GitHub；遇到连接错误请先检查 GitHub 访问。升级本插件按 DSH 的提示卸载后重新添加，个人运行数据保存在用户目录，不在安装包中。
 
+### 没有安装 Git 的电脑
+
+上面的仓库地址会由 DSH/pnpm 调用系统 Git 解析；若提示 `git ls-remote failed` 且“git 不是内部或外部命令”，可直接在同一个“添加插件”输入框改填源码压缩包地址：
+
+```text
+https://github.com/MATH-1-ZERO/dsh-douyin-fish/archive/refs/heads/main.tar.gz
+```
+
+这仍由 DSH 自动下载和安装，无需手动解压或安装 Git。已在隔离环境移除 PATH 中的 Git 后，用官方 CLI 验证下载安装与 bundle 配置合成成功。仍需能访问 GitHub；出现旧版本缓存时按宿主流程卸载再安装。
+
 ## 下载源码安装（备用）
 
 1. [下载仓库 ZIP](https://github.com/MATH-1-ZERO/dsh-douyin-fish/archive/refs/heads/main.zip) 并解压，或用 `git clone https://github.com/MATH-1-ZERO/dsh-douyin-fish.git` 克隆到长期保留的位置。路径可以包含中文和空格。
