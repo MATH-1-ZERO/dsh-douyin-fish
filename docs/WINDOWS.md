@@ -1,5 +1,7 @@
 # Windows 安装、更新与卸载
 
+推荐在 DSH“添加插件”输入 `https://github.com/MATH-1-ZERO/dsh-douyin-fish` 直接安装，无需运行下方本地脚本。GitHub 安装由宿主管理目录；下方目录保留要求只适用于本地 link 安装。更新第三方 GitHub 插件时，按 DSH 界面提示卸载后重新添加。
+
 ## 安装脚本
 
 `scripts/Install-Windows.ps1` 支持 Windows PowerShell 5.1 和 PowerShell 7。自动发现依次检查参数、`DSH_INSTALL_DIR`、常见目录和卸载注册信息。自定义安装位置使用 `-DshPath`，既可传安装目录，也可传 `DeepSeek Harness.exe` 完整路径。

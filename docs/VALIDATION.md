@@ -1,9 +1,12 @@
-# dev.17 Windows 发布验收
+# dev.18 Windows 发布验收
 
 2026-10-30，基于 DeepSeek Harness 0.2.1-rc.2 Windows x64 / Node.js 24.21.0。
 
 | 检查 | 结果 |
 | --- | --- |
+| GitHub 地址安装 | 官方 DSH CLI 使用 https://github.com/MATH-1-ZERO/dsh-douyin-fish，在隔离 DSH_HOME / github-check profile 下载并安装 dev.18，登记 bundle 并合成配置成功 |
+| 安装产物 | 实际下载包的 src/index.js 可导入、client 导出正确，配置、人设、控制台资源和工具说明均存在，tests 不进入安装包 |
+| 目录重构 | src/、src/browser/、tests/unit/、tests/browser/、config/、docs/ 按用途分层，重构后416项测试通过 |
 | 自动化回归 | 416项通过，0失败、0跳过；不触发真实发送 |
 | Windows PowerShell 5.1 | 安装位置检查、官方 CLI 版本查询通过 |
 | 实际安装 | 使用桌面包自带正式 CLI，在隔离 DSH_HOME 内安装本地链接并登记 bundle；包含中文和空格路径 |
