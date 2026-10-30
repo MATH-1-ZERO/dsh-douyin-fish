@@ -1,0 +1,1 @@
+export function verifiedBrowserLifecycle(checks){return checks?.bindingVerified===true&&(checks.browserReused===true?checks.browserRetained===true&&checks.sessionReleased===true:checks.ownBrowserStopped===true&&checks.portReleased===true);}

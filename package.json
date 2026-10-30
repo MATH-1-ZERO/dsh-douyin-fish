@@ -1,0 +1,111 @@
+{
+  "name": "@local/dsh-douyin-fish",
+  "version": "0.8.0-dev.17",
+  "private": true,
+  "type": "module",
+  "description": "大肥鱼控制台：主人与指定单聊自动回复、兴趣筛选原生卡片分享和评论、可编辑人设、真实账单与专用Edge运行控制。",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./client": "./client.js"
+  },
+  "files": [
+    "agent-bridge.js",
+    "attempt-review.js",
+    "autonomy.js",
+    "billing.js",
+    "browser-actions.js",
+    "browser-control.js",
+    "browser-draft.js",
+    "browser-lifecycle.js",
+    "browser-read.js",
+    "browser-workflow.js",
+    "client.js",
+    "comment-drafts.js",
+    "comment-policy.js",
+    "console-launcher.js",
+    "console-operations.js",
+    "console-server.js",
+    "console-view.js",
+    "context.js",
+    "conversation-browser.js",
+    "conversation-replies.js",
+    "conversation-share.js",
+    "conversation-state.js",
+    "delivery-report.js",
+    "development.js",
+    "engine.js",
+    "incoming.js",
+    "index.js",
+    "interaction-gate.js",
+    "interaction-settle.js",
+    "live-verification.js",
+    "manual-browser.js",
+    "manual.js",
+    "native-mention.js",
+    "native-share.js",
+    "owner-dm.js",
+    "owner-limits.js",
+    "owner-mention.js",
+    "owner-public-proof.js",
+    "owner-receipt.js",
+    "owner-replies.js",
+    "owner-reply-state.js",
+    "owner-settings.js",
+    "persona.js",
+    "reply-preview.js",
+    "retained-browser.js",
+    "share-policy.js",
+    "store.js",
+    "video-preferences.js",
+    "video-share.js",
+    "watch-observation.js",
+    "settings.json",
+    "cordis.patch.yml",
+    "workflow.md",
+    "locale",
+    "personas",
+    "console",
+    "live-browser",
+    "icon.svg",
+    "README.md",
+    "docs",
+    "scripts",
+    "Install-Windows.cmd",
+    "Check-Windows.cmd",
+    "Test-Windows.cmd",
+    "windows-paths.js",
+    "owner-binding.js"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings-general"
+      ]
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MATH-1-ZERO/dsh-douyin-fish.git"
+  },
+  "homepage": "https://github.com/MATH-1-ZERO/dsh-douyin-fish#readme",
+  "bugs": {
+    "url": "https://github.com/MATH-1-ZERO/dsh-douyin-fish/issues"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "os": [
+    "win32"
+  ],
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "check": "node scripts/check-release.mjs"
+  }
+}

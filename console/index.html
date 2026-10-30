@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>大肥鱼 · 小鱼的控制台</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+ <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+ <aside class="sidebar">
+  <a class="brand" href="#" aria-label="回到概览"><span class="brand-mark"><svg viewBox="0 0 160 110" fill="none" aria-hidden="true"><path d="M21 57C15 29 48 19 74 28c17 4 29 16 37 26 8-13 18-17 32-15-3 15-10 25-26 28-9 25-43 35-72 23C28 84 20 73 21 57Z" fill="#9ebdcb"/><path d="M23 63c16 24 56 27 85 4-15 30-73 37-85-4Z" fill="#d9e4df"/><circle cx="42" cy="53" r="3.6" fill="#594a4a"/><ellipse cx="41" cy="64" rx="8" ry="5" fill="#f0b5a8"/><path d="M54 60q7 6 13-1" stroke="#668996" stroke-width="3" stroke-linecap="round"/></svg></span><span>大肥鱼<small>小鱼的暖暖小窝</small></span></a>
+  <div class="sidebar-status"><span class="dot"></span><span id="connection">正在连接</span><span id="version"></span></div>
+  <div class="side-usage" id="side-usage"><span>今天的小小足迹</span><strong id="side-requests">— <small>次模型预约</small></strong><p>账号余额 <span id="side-balance">查询中</span></p></div>
+  <nav aria-label="控制台导航">
+   <p class="nav-group">她与这个世界</p>
+   <button class="nav-item active" data-page="overview"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg></span> 概览 <span class="nav-arrow">↗</span></button>
+   <button class="nav-item" data-page="persona"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a6 6 0 0 0-12 0v2M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0M3 6h2M3 10h2"/></svg></span> 人格档案</button>
+   <button class="nav-item" data-page="memory"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21C3 15-1 9 4 5c3-3 7-1 8 2 1-3 5-5 8-2 5 4 1 10-8 16Z"/></svg></span> 记忆</button>
+   <p class="nav-group">陪伴与行动</p>
+   <button class="nav-item" data-page="replies"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11a8 8 0 0 1-8 8H6l-4 3V11a9 9 0 0 1 19 0ZM7 10h10M7 14h6"/></svg></span> 私信与运行</button>
+   <button class="nav-item" data-page="videos"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg></span> 刷视频与互动</button>
+   <button class="nav-item" data-page="abilities"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/></svg></span> 能力与成长</button>
+   <button class="nav-item" data-page="timeline"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM12 7v5l3 2"/></svg></span> 时间线</button>
+   <p class="nav-group">系统</p>
+   <button class="nav-item" data-page="billing"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v14H3ZM3 6l14-3v3M16 11h5v5h-5ZM17 13h1"/></svg></span> 账单与余额</button>
+   <button class="nav-item" data-page="runtime"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6l1 4 4 1v7l-4 1-1 4H9l-1-4-4-1V8l4-1ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></span> 运行状态</button>
+  </nav>
+  <div class="sidebar-bottom"><span class="local-pill">● 仅在本机</span><p>每一次记忆，都有来处。<br>每一次行动，都有记录。</p><a id="guest-link" target="_blank" rel="noopener noreferrer" hidden>打开访客预览 ↗</a></div>
+ </aside>
+ <div class="workspace">
+  <header class="topbar"><div><span class="breadcrumb">小鱼的控制台</span><span class="crumb-sep">/</span><span id="page-label">概览</span></div><div class="topbar-right"><span id="access-role" class="pill">本机</span><time id="updated">—</time><button id="refresh" class="icon-button" aria-label="刷新状态" title="刷新状态">↻</button></div></header>
+  <div id="notice" class="notice" role="status" hidden></div>
+  <main id="content" tabindex="-1"><section class="loading"><div class="loading-orb"></div><h1>正在打开小鱼的世界</h1><p>从本机读取她的近况。</p></section></main>
+  <footer><span>大肥鱼 · 人设与记忆保存在本机</span><span>真实记录，慢慢生长 <span class="footer-star">✧</span></span></footer>
+ </div>
+ <dialog id="start-dialog"><span class="eyebrow">开始陪伴</span><h2>让小鱼回复主人消息？</h2><p>开始后，将自动读取已核验主人的新文字消息，生成并发送回复。当前已有消息会作为基线跳过。</p><p>你可以随时在这里暂停。</p><div class="dialog-actions"><button class="button secondary" id="cancel-start">先等等</button><button class="button primary" id="confirm-start">开始自动回复</button></div></dialog>
+ <template id="whale"><svg class="whale" viewBox="0 0 350 230" fill="none" aria-hidden="true"><ellipse cx="165" cy="207" rx="112" ry="13" fill="#c5a086" opacity=".15"/><path d="M42 113c-8-49 39-78 92-64 36 9 59 31 78 53 20-25 44-31 74-26-8 29-23 49-57 54-19 57-93 76-148 48-28-14-42-37-39-65Z" fill="#a2bdc9"/><path d="M44 131c29 43 111 46 170 5-31 61-151 75-170-5Z" fill="#dce5df"/><path d="M138 162c5 20 18 32 39 34-2-18-9-30-22-36" fill="#88aab9"/><circle cx="79" cy="105" r="5" fill="#564d4a"/><circle cx="80.5" cy="103.4" r="1.7" fill="#fffdf4"/><ellipse cx="76" cy="123" rx="13" ry="7" fill="#e7aba0" opacity=".9"/><path d="M99 121q10 10 22-2" stroke="#6e8e9a" stroke-width="3" stroke-linecap="round"/><path d="M106 36q-10-16 1-29M119 37q7-14 19-14" stroke="#8caebd" stroke-width="4" stroke-linecap="round"/><path d="M53 59c-13-3-20 1-25 11M268 147c16-4 25 1 31 12" stroke="#fff9ef" stroke-width="3" stroke-linecap="round"/><path d="m289 31 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z" fill="#ce9b69"/><path d="m26 156 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z" fill="#d6a778"/><circle cx="244" cy="26" r="4" fill="#e3b792"/><circle cx="320" cy="107" r="6" stroke="#ecc4a1" stroke-width="2"/><path d="M159 63c-5-12 12-20 17-8 6-10 21-2 14 9l-16 15Z" fill="#e9a994"/></svg></template>
+</body></html>

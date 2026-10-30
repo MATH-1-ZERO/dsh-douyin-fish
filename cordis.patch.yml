@@ -1,0 +1,4 @@
+- insert:
+    - id: local-douyin-fish
+      name: '@local/dsh-douyin-fish'
+      config: {}

@@ -1,0 +1,68 @@
+{
+  "enabled": false,
+  "timeZone": "Asia/Shanghai",
+  "activeStart": "09:00",
+  "activeEnd": "22:00",
+  "sessionMinutes": 15,
+  "restMinutes": 30,
+  "outgoingIntervalSeconds": 600,
+  "outgoingDailyLimit": 8,
+  "likedTags": [],
+  "blockedTags": [],
+  "ownerId": "",
+  "dmContacts": [],
+  "manualDrafts": {
+    "enabled": true,
+    "persona": "温柔、好奇、俏皮但克制；不催促、不装熟、不索取回应",
+    "maxCharacters": 100,
+    "maxEmoji": 2,
+    "maxDrafts": 20
+  },
+  "browser": {
+    "enabled": false,
+    "endpoint": "http://127.0.0.1:9222",
+    "allowedPages": [
+      "https://example.com/"
+    ]
+  },
+  "efficiency": {
+    "recentItems": 6,
+    "snippetCharacters": 160,
+    "maxContextBytes": 6000,
+    "maxInputBytes": 2000,
+    "maxOutputTokens": 160,
+    "maxResultBytes": 1200,
+    "requestsPer24Hours": 12,
+    "inputBytesPer24Hours": 96000,
+    "cacheMinutes": 15,
+    "rememberMessageText": false
+  },
+  "rules": {
+    "browse": {
+      "enabled": false,
+      "intervalSeconds": 30,
+      "dailyLimit": 60
+    },
+    "mention": {
+      "enabled": false,
+      "intervalSeconds": 1800,
+      "dailyLimit": 3
+    },
+    "comment": {
+      "enabled": false,
+      "intervalSeconds": 1800,
+      "dailyLimit": 5
+    },
+    "dm": {
+      "enabled": false,
+      "intervalSeconds": 300,
+      "dailyLimit": 10
+    }
+  },
+  "manualBrowser": {
+    "enabled": true,
+    "readsPer24Hours": 3,
+    "intervalMinutes": 15
+  },
+  "ownerAddress": "老大"
+}
